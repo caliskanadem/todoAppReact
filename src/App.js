@@ -5,7 +5,9 @@ import TodoList from "./components/TodoList";
 
 function App() {
   const [inputText, setInputText] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
   const [status, setStatus] = useState("All");
   const [filteredTodos, setFilteredTodos] = useState([]);
 
@@ -37,20 +39,20 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  // const getLocalTodos = () => {
-  //   if (localStorage.getItem("todos") === null) {
-  //     localStorage.setItem("todos", JSON.stringify([]));
-  //   } else {
-  //     setTodos(JSON.parse(localStorage.getItem("todos")));
-  //   }
-  // };
-
   const getLocalTodos = () => {
-    const localTodos = localStorage.getItem("todos");
-    if (localTodos && JSON.parse(localTodos).length > 0) {
-      setTodos(JSON.parse(localTodos));
+    if (!!localStorage.getItem("todos")) {
+      setTodos(JSON.parse(localStorage.getItem("todos")));
+    } else {
+      localStorage.setItem("todos", JSON.stringify([]));
     }
   };
+
+  // const getLocalTodos = () => {
+  //   const localTodos = localStorage.getItem("todos");
+  //   if (localTodos && JSON.parse(localTodos).length > 0) {
+  //     setTodos(JSON.parse(localTodos));
+  //   }
+  // };
 
   return (
     <div>

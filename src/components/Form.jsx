@@ -32,7 +32,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   const statusHandler = (e) => {
     setStatus(e.target.value);
   };
-  // console.log(todos);
+
   return (
     <form onSubmit={submitTodoHandler}>
       <div className="search">
